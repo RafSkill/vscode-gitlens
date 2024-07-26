@@ -162,6 +162,11 @@ export interface Config {
 	};
 	readonly integrations: {
 		readonly enabled: boolean;
+		readonly experimental: {
+			readonly gkdev: {
+				readonly enabled: boolean;
+			};
+		};
 	};
 	readonly keymap: KeyMap;
 	readonly liveshare: {

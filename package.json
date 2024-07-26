@@ -3367,6 +3367,13 @@
 						"scope": "window",
 						"order": 20
 					},
+					"gitlens.integrations.experimental.gkdev.enabled": {
+						"type": "boolean",
+						"default": false,
+						"markdownDescription": "Specifies whether to enable authentication with GKDev",
+						"scope": "window",
+						"order": 30
+					},
 					"gitlens.remotes": {
 						"type": [
 							"array",
