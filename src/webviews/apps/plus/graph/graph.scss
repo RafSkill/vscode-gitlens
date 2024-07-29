@@ -4,6 +4,8 @@
 @import '../../shared/glicons';
 @import '../../../../../node_modules/@gitkraken/gitkraken-components/dist/styles.css';
 
+$graph-media-xs-max-width: 334px;
+
 @mixin focusStyles() {
 	outline: 1px solid var(--vscode-focusBorder);
 	outline-offset: -1px;
@@ -1034,6 +1036,12 @@ gl-feature-gate gl-feature-badge {
 .graph-container {
 	& .resizable-handle.horizontal {
 		display: none;
+	}
+
+	& .scrollbar-outer.horizontal {
+		@media (max-width: $graph-media-xs-max-width) {
+			display: none;
+		}
 	}
 
 	& .node.stash-node .graph-icon {
