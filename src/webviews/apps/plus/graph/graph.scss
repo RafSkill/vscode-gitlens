@@ -850,6 +850,10 @@ button:not([disabled]),
 	font-size: 1.3rem;
 	flex-wrap: wrap;
 
+	@media (max-width: $graph-media-xs-max-width) {
+		padding-left: 0;
+	}
+
 	&,
 	&__row,
 	&__group {
