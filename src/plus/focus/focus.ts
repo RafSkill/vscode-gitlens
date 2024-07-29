@@ -166,7 +166,10 @@ export class FocusCommand extends QuickCommand<State> {
 			this.container.telemetry.sendEvent('launchpad/open', { ...this.telemetryContext }, this.source);
 		}
 
-		const counter = 0;
+		let counter = 0;
+		if (args?.state?.item != null) {
+			counter++;
+		}
 
 		this.initialState = {
 			counter: counter,
@@ -232,7 +235,7 @@ export class FocusCommand extends QuickCommand<State> {
 
 			let newlyConnected = false;
 			const hasConnectedIntegrations = [...context.connectedIntegrations.values()].some(c => c);
-			if (state.counter < 1 && !hasConnectedIntegrations) {
+			if (!hasConnectedIntegrations) {
 				if (this.container.telemetry.enabled) {
 					this.container.telemetry.sendEvent(
 						opened ? 'launchpad/steps/connect' : 'launchpad/opened',
@@ -264,7 +267,7 @@ export class FocusCommand extends QuickCommand<State> {
 
 			await updateContextItems(this.container, context, { force: newlyConnected });
 
-			if (state.counter < 2 || state.item == null) {
+			if (state.counter < 1 || state.item == null) {
 				if (this.container.telemetry.enabled) {
 					this.container.telemetry.sendEvent(
 						opened ? 'launchpad/steps/main' : 'launchpad/opened',

@@ -192,6 +192,8 @@ export type FocusItem = FocusPullRequest & {
 	actionableCategory: FocusActionCategory;
 	suggestedActions: FocusAction[];
 	openRepository?: OpenRepository;
+
+	underlyingPullRequest: PullRequest;
 };
 
 export type OpenRepository = {
@@ -748,6 +750,7 @@ export class FocusProvider implements Disposable {
 					enrichable: enrichable,
 					repoIdentity: repoIdentity,
 					refs: pr.pullRequest.refs,
+					underlyingPullRequest: pr.pullRequest,
 				};
 			}) satisfies (EnrichablePullRequest | undefined)[];
 
@@ -791,7 +794,8 @@ export class FocusProvider implements Disposable {
 						actionableCategory: actionableCategory,
 						suggestedActions: suggestedActions,
 						openRepository: openRepository,
-					};
+						underlyingPullRequest: item.underlyingPullRequest,
+					} satisfies FocusItem;
 				}),
 			)) satisfies FocusItem[];
 

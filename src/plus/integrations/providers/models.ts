@@ -885,6 +885,7 @@ export type EnrichablePullRequest = ProviderPullRequest & {
 		'id' | 'domain' | 'repoDomain' | 'repoName'
 	>;
 	refs?: PullRequestRefs;
+	underlyingPullRequest: PullRequest;
 };
 
 export const getActionablePullRequests = GitProviderUtils.getActionablePullRequests;
