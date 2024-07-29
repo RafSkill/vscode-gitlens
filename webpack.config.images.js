@@ -83,17 +83,6 @@ module.exports =
 			plugins: plugins,
 		};
 
-		if (env.useOptimization) {
-			config.optimization = {
-				minimize: true,
-				minimizer: [
-					new ImageMinimizerPlugin({
-						deleteOriginalAssets: true,
-						generator: [imageGeneratorConfig],
-					}),
-				],
-			};
-		}
 
 		return config;
 	};
