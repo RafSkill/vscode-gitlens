@@ -6,10 +6,17 @@ import { isSubscriptionExpired, isSubscriptionPaid, isSubscriptionTrial } from '
 import type { SubscriptionChangeEvent } from '../../plus/gk/account/subscriptionService';
 import { registerCommand } from '../../system/command';
 import { getContext, onDidChangeContext } from '../../system/context';
+import { Logger } from '../../system/logger';
 import type { IpcMessage } from '../protocol';
 import type { WebviewHost, WebviewProvider } from '../webviewProvider';
-import type { CollapseSectionParams, DidChangeRepositoriesParams, State } from './protocol';
-import { CollapseSectionCommand, DidChangeOrgSettings, DidChangeRepositories, DidChangeSubscription } from './protocol';
+import type { CollapseSectionParams, DidChangeRepositoriesParams, DidChangeUsagesParams, State } from './protocol';
+import {
+	CollapseSectionCommand,
+	DidChangeOrgSettings,
+	DidChangeRepositories,
+	DidChangeSubscription,
+	DidChangeUsage,
+} from './protocol';
 
 const emptyDisposable = Object.freeze({
 	dispose: () => {
@@ -24,6 +31,8 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 		private readonly container: Container,
 		private readonly host: WebviewHost,
 	) {
+		Logger.log('test usage', this.container.usage.get('graphView:shown'));
+
 		this._disposable = Disposable.from(
 			this.container.git.onDidChangeRepositories(this.onRepositoriesChanged, this),
 			!workspace.isTrusted
@@ -31,11 +40,21 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 				: emptyDisposable,
 			this.container.subscription.onDidChange(this.onSubscriptionChanged, this),
 			onDidChangeContext(this.onContextChanged, this),
+			this.container.usage.onDidChange(this.onUsagesChanged, this),
 		);
 	}
 
 	dispose() {
 		this._disposable.dispose();
+	}
+
+	private onUsagesChanged() {
+		Logger.log(
+			'usage changed',
+			this.container.usage.get('graphView:shown'),
+			this.container.usage.get('graphWebview:shown'),
+		);
+		this.notifyDidChangeUsages();
 	}
 
 	private onRepositoriesChanged() {
@@ -103,6 +122,8 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 	}
 
 	private onSubscriptionChanged(e: SubscriptionChangeEvent) {
+		Logger.log('test usage', this.container.usage);
+
 		void this.notifyDidChangeSubscription(e.current);
 	}
 
@@ -111,6 +132,7 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 		return {
 			...this.host.baseWebviewState,
 			repositories: this.getRepositoriesState(),
+			onboardingState: this.getOnboardingState(),
 			webroot: this.host.getWebRoot(),
 			promoStates: await this.getCanShowPromos(subscription),
 			subscription: subscription,
@@ -125,6 +147,14 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 			openCount: this.container.git.openRepositoryCount,
 			hasUnsafe: this.container.git.hasUnsafeRepositories(),
 			trusted: workspace.isTrusted,
+		};
+	}
+
+	private getOnboardingState(): DidChangeUsagesParams {
+		return {
+			graphVisited:
+				Boolean(this.container.usage.get('graphView:shown')?.firstUsedAt) ||
+				Boolean(this.container.usage.get('graphWebview:shown')?.firstUsedAt),
 		};
 	}
 
@@ -147,6 +177,10 @@ export class HomeWebviewProvider implements WebviewProvider<State> {
 
 	private notifyDidChangeRepositories() {
 		void this.host.notify(DidChangeRepositories, this.getRepositoriesState());
+	}
+
+	private notifyDidChangeUsages() {
+		void this.host.notify(DidChangeUsage, this.getOnboardingState());
 	}
 
 	private async notifyDidChangeSubscription(subscription?: Subscription) {

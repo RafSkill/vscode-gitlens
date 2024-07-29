@@ -4,6 +4,10 @@ import { IpcCommand, IpcNotification } from '../protocol';
 
 export const scope: IpcScope = 'home';
 
+export interface OnboardingState {
+	graphVisited: boolean;
+}
+
 export interface State extends WebviewState {
 	repositories: DidChangeRepositoriesParams;
 	webroot?: string;
@@ -12,6 +16,7 @@ export interface State extends WebviewState {
 	orgSettings: {
 		drafts: boolean;
 	};
+	onboardingState: OnboardingState;
 	walkthroughCollapsed: boolean;
 }
 
@@ -32,6 +37,9 @@ export interface DidChangeRepositoriesParams {
 	trusted: boolean;
 }
 export const DidChangeRepositories = new IpcNotification<DidChangeRepositoriesParams>(scope, 'repositories/didChange');
+
+export interface DidChangeUsagesParams extends OnboardingState {}
+export const DidChangeUsage = new IpcNotification<DidChangeUsagesParams>(scope, 'onboarding/usage/didChange');
 
 export interface DidChangeSubscriptionParams {
 	promoStates: Record<string, boolean>;

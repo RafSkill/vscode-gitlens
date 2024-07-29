@@ -7,6 +7,7 @@ import {
 	DidChangeOrgSettings,
 	DidChangeRepositories,
 	DidChangeSubscription,
+	DidChangeUsage,
 } from '../../home/protocol';
 import type { IpcMessage } from '../../protocol';
 import { ExecuteCommand } from '../../protocol';
@@ -17,10 +18,30 @@ import '../shared/components/button';
 import '../shared/components/code-icon';
 import '../shared/components/feature-badge';
 import '../shared/components/overlays/tooltip';
+import './components/progress-line';
+import './components/progress-tracker';
+import './components/onboarding-item';
+import './components/onboarding-item-group';
+import './components/onboarding-checkbox';
+import './components/onboarding-button';
+import './components/home-app';
+import type { GlHomeApp } from './components/home-app';
 
 export class HomeApp extends App<State> {
 	constructor() {
 		super('HomeApp');
+	}
+
+	private _component?: GlHomeApp;
+	private get component() {
+		if (this._component == null) {
+			this._component = (document.querySelector('gl-home-app') as GlHomeApp)!;
+		}
+		return this._component;
+	}
+
+	attachState() {
+		this.component.state = this.state.onboardingState;
 	}
 
 	private get blockRepoFeatures() {
@@ -33,6 +54,7 @@ export class HomeApp extends App<State> {
 	protected override onInitialize() {
 		this.state = this.getState() ?? this.state;
 		this.updateState();
+		this.attachState();
 	}
 
 	protected override onBind(): Disposable[] {
@@ -54,6 +76,12 @@ export class HomeApp extends App<State> {
 
 	protected override onMessageReceived(msg: IpcMessage) {
 		switch (true) {
+			case DidChangeUsage.is(msg):
+				this.state.onboardingState = msg.params;
+				this.state.timestamp = Date.now();
+				this.setState(this.state);
+				this.attachState();
+				break;
 			case DidChangeRepositories.is(msg):
 				this.state.repositories = msg.params;
 				this.state.timestamp = Date.now();
