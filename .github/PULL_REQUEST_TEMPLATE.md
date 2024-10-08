@@ -1,6 +1,6 @@
 ## ❤ Thank you for contributing to GitLens! ❤
 
-### 🚨 IMPORTANT 🚨
+🚨 IMPORTANT 🚨
 
 - Please create an issue _before_ creating a Pull Request
 - Please use the following Git commit message style
