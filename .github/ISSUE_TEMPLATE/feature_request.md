@@ -1,6 +1,7 @@
 ---
-
-<!-- Describe the feature you'd like. -->
+ name: Feature request
+ about: Suggest an idea for GitLens
+ title: ''
  labels: feature, triage
  assignees: ''
  ---
