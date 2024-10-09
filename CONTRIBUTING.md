@@ -19,10 +19,11 @@ git clone https://github.com/gitkraken/vscode-gitlens.git
 Prerequisites
 
 - [Git](https://git-scm.com/), `>= 2.7.2`
-- [NodeJS](https://nodejs.org/), `>= 20`
-- [yarn](https://yarnpkg.com/), `>= 1.22.22`
+Git (https://git-scm.com/), `>= 2.7.2`
+NodeJS (https://nodejs.org/), `>= 20`
+yarn (https://yarnpkg.com/), `>= 1.22.22`
 
-### Dependencies
+Dependencies
 
 From a terminal, where you have cloned the repository, execute the following command to install the required dependencies:
 
@@ -30,7 +31,7 @@ From a terminal, where you have cloned the repository, execute the following com
 yarn
 ```
 
-### Build
+Build
 
 From a terminal, where you have cloned the repository, execute the following command to re-build the project from scratch:
 
@@ -38,7 +39,7 @@ From a terminal, where you have cloned the repository, execute the following com
 yarn run rebuild
 ```
 
-👉 **NOTE!** This will run a complete rebuild of the project.
+👉 NOTE! This will run a complete rebuild of the project.
 
 Or to just run a quick build, use:
 
@@ -46,7 +47,7 @@ Or to just run a quick build, use:
 yarn run build
 ```
 
-### Watch
+Watch
 
 During development you can use a watcher to make builds on changes quick and easy. From a terminal, where you have cloned the repository, execute the following command:
 
@@ -54,7 +55,7 @@ During development you can use a watcher to make builds on changes quick and eas
 yarn run watch
 ```
 
-Or use the provided `watch` task in VS Code, execute the following from the command palette (be sure there is no `>` at the start):
+Or use the provided watch task in VS Code, execute the following from the command palette (be sure there is no > at the start):
 
 ```
 task watch
@@ -62,15 +63,15 @@ task watch
 
 This will first do an initial full build and then watch for file changes, compiling those changes incrementally, enabling a fast, iterative coding experience.
 
-👉 **Tip!** You can press <kbd>CMD+SHIFT+B</kbd> (<kbd>CTRL+SHIFT+B</kbd> on Windows, Linux) to start the watch task.
+👉 Tip! You can press <kbd>CMD+SHIFT+B</kbd> (<kbd>CTRL+SHIFT+B</kbd> on Windows, Linux) to start the watch task.
 
-👉 **Tip!** You don't need to stop and restart the development version of Code after each change. You can just execute `Reload Window` from the command palette.
+👉 Tip! You don't need to stop and restart the development version of Code after each change. You can just execute Reload Window from the command palette.
 
-### Formatting
+Formatting
 
-This project uses [prettier](https://prettier.io/) for code formatting. You can run prettier across the code by calling `yarn run pretty` from a terminal.
+This project uses prettier(https://prettier.io/) for code formatting. You can run prettier across the code by calling yarn run pretty from a terminal.
 
-To format the code as you make changes you can install the [Prettier - Code formatter](https://marketplace.visualstudio.com/items/esbenp.prettier-vscode) extension.
+To format the code as you make changes you can install the Prettier - Code formatter(https://marketplace.visualstudio.com/items/esbenp.prettier-vscode) extension.
 
 Add the following to your User Settings to run prettier:
 
@@ -78,13 +79,13 @@ Add the following to your User Settings to run prettier:
 "editor.formatOnSave": true,
 ```
 
-### Linting
+Linting
 
-This project uses [ESLint](https://eslint.org/) for code linting. You can run ESLint across the code by calling `yarn run lint` from a terminal. Warnings from ESLint show up in the `Errors and Warnings` quick box and you can navigate to them from inside VS Code.
+This project uses ESLint(https://eslint.org/) for code linting. You can run ESLint across the code by calling yarn run lint from a terminal. Warnings from ESLint show up in the Errors and Warnings quick box and you can navigate to them from inside VS Code.
 
-To lint the code as you make changes you can install the [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension.
+To lint the code as you make changes you can install the ESLint(https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension.
 
-### Bundling
+Bundling
 
 To generate a production bundle (without packaging) run the following from a terminal:
 
@@ -98,50 +99,49 @@ To generate a VSIX (installation package) run the following from a terminal:
 yarn run package
 ```
 
-### Debugging
+Debugging
 
-#### Using VS Code (desktop)
+Using VS Code (desktop)
 
-1. Open the `vscode-gitlens` folder
-2. Ensure the required [dependencies](#dependencies) are installed
-3. Choose the `Watch & Run` launch configuration from the launch dropdown in the Run and Debug viewlet and press `F5`
-4. A new VS Code "Extension Development Host" window will open with the extension loaded and ready for debugging
-   1. If the "Extension Development Host" window opened without a folder/workspace with a repository (required for most GitLens functionality), you will need to open one and then stop and restart the debug session
+Open the vscode-gitlens folder
+Ensure the required dependencies(#dependencies) are installed
+Choose the Watch & Run launch configuration from the launch dropdown in the Run and Debug viewlet and press F5
+A new VS Code "Extension Development Host" window will open with the extension loaded and ready for debugging
+If the "Extension Development Host" window opened without a folder/workspace with a repository (required for most GitLens functionality), you will need to open one and then stop and restart the debug session
 
-In order to see any code changes reflected in the "Extension Development Host" window, you will need to restart the debug session, e.g. using the "Restart" button in the debug toolbar or by pressing `[Ctrl|Cmd]+Shift+F5`. Although, if the code changes are purely within a webview, you can refresh the webview by clicking the refresh button in the toolbar associated with the webview.
+In order to see any code changes reflected in the "Extension Development Host" window, you will need to restart the debug session, e.g. using the "Restart" button in the debug toolbar or by pressing Ctrl|Cmd+Shift+F5. Although, if the code changes are purely within a webview, you can refresh the webview by clicking the refresh button in the toolbar associated with the webview.
 
-_Note: If you see a pop-up with a message similar to "The task cannot be tracked. Make sure to have a problem matcher defined.", you will need to install the [TypeScript + Webpack Problem Matchers](https://marketplace.visualstudio.com/items?itemName=amodio.tsl-problem-matcher) extension._
+_Note: If you see a pop-up with a message similar to "The task cannot be tracked. Make sure to have a problem matcher defined.", you will need to install the TypeScript + Webpack Problem Matchers(https://marketplace.visualstudio.com/items?itemName=amodio.tsl-problem-matcher) extension._
 
-#### Using VS Code (desktop webworker)
+Using VS Code (desktop webworker)
 
-1. Open the `vscode-gitlens` folder
-2. Ensure the required [dependencies](#dependencies) are installed
-3. Choose the `Watch & Run (web)` launch configuration from the launch dropdown in the Run and Debug viewlet and press `F5`
-4. A new VS Code "Extension Development Host" window will open with the extension loaded and ready for debugging
-   1. If the "Extension Development Host" window opened without a folder/workspace with a repository (required for most GitLens functionality), you will need to open one and then stop and restart the debug session
+Open the vscode-gitlens folder
+Ensure the required dependencies(#dependencies) are installed
+Choose the Watch & Run (web) launch configuration from the launch dropdown in the Run and Debug viewlet and press F5
+A new VS Code "Extension Development Host" window will open with the extension loaded and ready for debugging
+If the "Extension Development Host" window opened without a folder/workspace with a repository (required for most GitLens functionality), you will need to open one and then stop and restart the debug session
 
-In order to see any code changes reflected in the "Extension Development Host" window, you will need to restart the debug session, e.g. using the "Restart" button in the debug toolbar or by pressing `[Ctrl|Cmd]+Shift+F5`. Although, if the code changes are purely within a webview, you can refresh the webview by clicking the refresh button in the toolbar associated with the webview.
+In order to see any code changes reflected in the "Extension Development Host" window, you will need to restart the debug session, e.g. using the "Restart" button in the debug toolbar or by pressing Ctrl|Cmd+Shift+F5. Although, if the code changes are purely within a webview, you can refresh the webview by clicking the refresh button in the toolbar associated with the webview.
 
-#### Using VS Code for the Web (locally)
+Using VS Code for the Web (locally)
 
 See https://code.visualstudio.com/api/extension-guides/web-extensions#test-your-web-extension-in-a-browser-using-vscodetestweb
 
-1. Open the `vscode-gitlens` folder
-2. Ensure the required [dependencies](#dependencies) are installed
-3. Run the `build` or `watch` task from the command palette
-4. Run the `Run (local web)` task from the command palette
+Open the vscode-gitlen` folder
+Ensure the required dependencies(#dependencies) are installed
+Run the build or watch task from the command palette
+Run the Run (local web) task from the command palette
 
-#### Using VS Code for the Web (vscode.dev)
+Using VS Code for the Web (vscode.dev)
 
 See https://code.visualstudio.com/api/extension-guides/web-extensions#test-your-web-extension-in-vscode.dev
 
-1. Open the `vscode-gitlens` folder
-2. Ensure the required [dependencies](#dependencies) are installed
-3. Run the `build` or `watch` task from the command palette
-4. Run the `Run (vscode.dev)` task from the command palette
+Open the `vscode-gitlens` folder
+Ensure the required [dependencies](#dependencies) are installed
+Run the `build` or `watch` task from the command palette
+Run the `Run (vscode.dev)` task from the command palette
 
-## Submitting a Pull Request
-
+ 
 Please follow all the instructions in the [PR template](.github/PULL_REQUEST_TEMPLATE.md).
 
 ### Contributions to GitLens+ Licensed Files
@@ -246,3 +246,6 @@ To add new icons to the GL Icons font follow the steps below:
   ```
 
 Once you've finshed copy the new `glicons.woff2?<uuid>` URL from `src/webviews/apps/shared/glicons.scss` and search and replace the old references with the new one.
+
+
+[def]: CODE_OF_CONDUCT.md
