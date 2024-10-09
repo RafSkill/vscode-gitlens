@@ -1,16 +1,16 @@
-# Contributing
+ Contributing
 
 👍🎉 First off, thanks for taking the time to contribute! 🎉👍
 
 When contributing to this project, please first discuss the changes you wish to make via an issue before making changes.
 
-Please note the [Code of Conduct](CODE_OF_CONDUCT.md) document, please follow it in all your interactions with this project.
+Please note the Code of Conduct def document, please follow it in all your interactions with this project.
 
-## Your First Code Contribution
+Your First Code Contribution
 
-Unsure where to begin contributing? You can start by looking through the [`help-wanted`](https://github.com/gitkraken/vscode-gitlens/labels/help-wanted) issues.
+Unsure where to begin contributing? You can start by looking through the help-wanted (https://github.com/gitkraken/vscode-gitlens/labels/help-wanted) issues.
 
-### Getting the code
+Getting the code
 
 ```
 git clone https://github.com/gitkraken/vscode-gitlens.git
@@ -18,7 +18,6 @@ git clone https://github.com/gitkraken/vscode-gitlens.git
 
 Prerequisites
 
-- [Git](https://git-scm.com/), `>= 2.7.2`
 Git (https://git-scm.com/), `>= 2.7.2`
 NodeJS (https://nodejs.org/), `>= 20`
 yarn (https://yarnpkg.com/), `>= 1.22.22`
